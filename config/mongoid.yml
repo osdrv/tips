@@ -1,0 +1,19 @@
+defaults: &defaults
+  host: localhost
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+development:
+  <<: *defaults
+  database: tips_development
+
+test:
+  <<: *defaults
+  database: tips_test
+
+production:
+  <<: *defaults
+  database: tips_prod
