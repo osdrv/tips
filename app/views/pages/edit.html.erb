@@ -1,0 +1,24 @@
+<div class='page-form'>
+  <div>
+    <%= render 'pages/form' %>
+  </div>
+</div>
+
+<iframe src='' width='100%' height='30000px' id='page-view' scrolling="no"></iframe>
+<div class='overlay' id='overlay'></div>
+<script type="text/javascript" charset="utf-8">
+  function load_page(url) {
+    $('#page-view').attr('src', url)
+    // $('#overlay').drawing_board({
+    //   transport: null,
+    //   
+    // })
+  }
+  $(function() {
+    var _input = $('#page_url')
+    _input.blur(function(e) {
+      load_page($(this).val())
+    })
+    if (_input.val()) load_page(_input.val())
+  })
+</script>    

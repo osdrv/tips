@@ -13,6 +13,8 @@ Tips::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :pages
+
   resources :tips
 
   # Sample resource route with options:
