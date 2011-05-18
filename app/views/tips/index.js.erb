@@ -1,0 +1,40 @@
+window._tip = window._tip || {}
+window._tip.tip = function(o) { this._initialize(o); return this }
+
+var _T = window._tip.tip
+
+_T.prototype = {
+  _point: null,
+  _id: null,
+  _size: null,
+  _body: null,
+  _div: null,
+  _initialize: function(o) {
+    this._id = o['_id']
+    this._point = o['point']
+    this._size = o['size']
+    this._body = o['body']
+  },
+  
+  draw: function() {
+    var style = [
+      'position: absolute;',
+      'left:', this._point['l'], 'px;',
+      'top:', this._point['t'], 'px;',
+      'width:', this._size['w'], 'px;',
+      'height:', this._size['h'], 'px;',
+      'background-color: #AAA;'
+    ].join('')
+    this._div = document.createElement('div')
+    this._div.setAttribute('id', this._id)
+    this._div.setAttribute('class', 'tip')
+    this._div.setAttribute('style', style)
+    this._div.innerHTML = this._body
+    document.body.appendChild(this._div)
+  }
+}
+
+<% @tips.each do |tip| %>
+  var t = new _T(<%= tip.to_json.html_safe %>);
+  t.draw()
+<% end %>
