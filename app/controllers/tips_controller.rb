@@ -6,6 +6,8 @@ class TipsController < InheritedResources::Base
 protected
 
   def collection
-    @tips = Tip.for_page(params[:url])
+    referer = params[:url] || request.referer
+    Rails.logger.debug(referer)
+    @tips = Tip.for_page(referer)
   end
 end

@@ -1,7 +1,12 @@
 window._tip = window._tip || {}
 window._tip.tip = function(o) { this._initialize(o); return this }
 
-var _T = window._tip.tip
+var _T = window._tip.tip,
+s = document.createElement('style')
+
+s.innerHTML = '.tip { position: absolute; background-color: #f4f1b7; border-radius: 10px; padding: 0; } .tip div { padding: 20px; } '
+s.setAttribute('type', 'text/css')
+document.body.appendChild(s)
 
 _T.prototype = {
   _point: null,
@@ -18,12 +23,10 @@ _T.prototype = {
   
   draw: function() {
     var style = [
-      'position: absolute;',
       'left:', this._point['l'], 'px;',
       'top:', this._point['t'], 'px;',
       'width:', this._size['w'], 'px;',
-      'height:', this._size['h'], 'px;',
-      'background-color: #AAA;'
+      'height:', this._size['h'], 'px;'
     ].join('')
     this._div = document.createElement('div')
     this._div.setAttribute('id', this._id)
