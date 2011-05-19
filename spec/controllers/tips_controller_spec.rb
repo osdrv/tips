@@ -17,4 +17,15 @@ describe TipsController do
       response.should be_ok
     end
   end
+
+  describe 'POST /tips.json' do
+    let!(:page1) { Page.create!( :url => 'http://4pcbr.com/') }
+
+    it 'должен сохранять новую всплывашку' do
+      post :create, :format => :json, :page_id => page1._id, 
+        :tip => { :body => '<div class="tip">hello world</div>', :point => { :l => 100, :t => 100 }, :size => { :w => 300, :h => 200 } }
+      response.status.to_i.should eq 201
+      Page.find(page1._id).tips.count.should eq 1
+    end
+  end
 end
