@@ -3,7 +3,7 @@ function _c(e) { e.preventDefault(); e.stopPropagation() }
 var Tip = (function() {
   return {
     create: function(pos) {
-      $('<div/>').appendTo('body').tip({ pos: pos })
+      $('<div/>').appendTo('body').admin_tip({ pos: pos })
     }
   }
 })()
@@ -24,31 +24,37 @@ var Tip = (function() {
 })(jQuery);
 
 ;(function($) {
-  $.widget('ui.tip', {
+  $.widget('ui.admin_tip', {
     options: {
       pos: [0, 0],
       size: [400, 100],
-      klass: 'tip'
+      klass: 'tip',
+      content: ''
     },
     _create: function() {
       var o = this.options, e = this.element, self = this,
-      t = $('<textarea/>'),
-      s = $('<input type="button" value="Save"/>')
+      t = $('<textarea/>').val(o.content),
+      s = $('<input type="button" value="Save"/>'),
+      r = $('<input type="button" value="Remove"/>')
+
       e.css({ left: o['pos'][0], top: o['pos'][1] })
         .width(o['size'][0]).height(o['size'][1])
         .addClass(o['klass'])
         .draggable()
-        .append($('<div/>').append(t).append(s))
+        .append($('<div/>').append(t).append(s).append(r))
       s.click(function(ev) {
         _c(ev)
         var position = e.position()
         $.create('/pages/' + PAGE_ID + '/tips.json', { tip: {
           point: { l: position.left, t: position.top },
-          width: { w: e.width(), h: e.height() },
+          size: { w: e.width(), h: e.height() },
           body: t.val()
         }}, function() {
           t.replaceWith(t.val())
         })
+      })
+      r.click(function(ev) {
+        
       })
       t.focus()
     }

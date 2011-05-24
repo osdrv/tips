@@ -18,5 +18,12 @@
       load_page($(this).val())
     })
     if (_input.val()) load_page(_input.val())
+    <% @page.tips.each do |tip| %>
+      $('<div/>').attr('tip_id', '<%= tip.id %>').appendTo('body').admin_tip({
+        pos: [<%= tip.point['l'] %>, <%= tip.point['t'] %>],
+        size: [<%= tip.size['w'] %>, <%= tip.size['h'] %>],
+        content: '<%= tip.body %>'
+      })
+    <% end %>
   })
-</script>    
+</script>

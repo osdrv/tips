@@ -4,7 +4,7 @@ window._tip.tip = function(o) { this._initialize(o); return this }
 var _T = window._tip.tip,
 s = document.createElement('style')
 
-s.innerHTML = '.tip { position: absolute; background-color: #f4f1b7; border-radius: 10px; padding: 0; } .tip div { padding: 20px; } '
+s.innerHTML = '.tip { position: absolute; background-color: #f4f1b7; border-radius: 10px; padding: 0; } .tip div.internal { padding: 20px; } '
 s.setAttribute('type', 'text/css')
 document.body.appendChild(s)
 
@@ -32,7 +32,7 @@ _T.prototype = {
     this._div.setAttribute('id', this._id)
     this._div.setAttribute('class', 'tip')
     this._div.setAttribute('style', style)
-    this._div.innerHTML = this._body
+    this._div.innerHTML = "<div class='internal'>" + this._body + "</div>"
     document.body.appendChild(this._div)
   }
 }
